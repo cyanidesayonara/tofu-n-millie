@@ -24,8 +24,8 @@ COPY . /app/
 # Expose port
 EXPOSE 8000
 
-# Run gunicorn
-# In production, we assume static files were already collected or are served by nginx/whitenoise
-# For simple deployment without external static hosting, we'll start with standard runserver
-# or gunicorn if we configure whitenoise.
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "tofu_n_millie_web.wsgi:application"]
+# Copy and set entrypoint
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
+CMD ["/app/entrypoint.sh"]
