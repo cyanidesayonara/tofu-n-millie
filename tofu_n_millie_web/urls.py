@@ -8,5 +8,5 @@ urlpatterns = [
     path('', include('gallery.urls')),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Always serve media files (fine for a prototype; use S3 or similar for production)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
