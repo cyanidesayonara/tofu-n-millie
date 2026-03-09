@@ -135,7 +135,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # django-seo-js Setup
-SEO_JS_PRERENDER_URL = env('SEO_JS_PRERENDER_URL', default='https://service.prerender.io/')
-SEO_JS_PRERENDER_RECACHE_URL = env('SEO_JS_PRERENDER_RECACHE_URL', default='https://api.prerender.io/recache')
 SEO_JS_PRERENDER_TOKEN = env('SEO_JS_PRERENDER_TOKEN', default='your-prerender-token')
-SEO_JS_BACKEND = "django_seo_js.backends.PrerenderHosted"
+SEO_JS_BACKEND = "django_seo_js.backends.PrerenderIO"
