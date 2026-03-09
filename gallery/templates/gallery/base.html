@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load django_seo_js %}
+    {% seo_js_head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Tofu & Millie{% endblock %}</title>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'gallery/style.css' %}">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container navbar-content">
+            <a href="{% url 'gallery:index' %}" class="logo">
+                <span class="tofu">Tofu</span> & <span class="millie">Millie</span>
+            </a>
+            <nav>
+                <a href="{% url 'gallery:index' %}">Gallery</a>
+                <a href="/admin">Admin Area</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; {% now "Y" %} Tofu & Millie. Made with love.</p>
+    </footer>
+</body>
+</html>

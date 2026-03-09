@@ -1,0 +1,65 @@
+{% extends 'gallery/base.html' %}
+
+{% block content %}
+<section class="hero">
+    <h1>Our Little Rascals</h1>
+    <p>A collection of chaotic and cute moments.</p>
+</section>
+
+<div class="gallery-filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="tofu">Tofu 🐈</button>
+    <button class="filter-btn" data-filter="millie">Millie 🐕</button>
+</div>
+
+<div class="photo-grid">
+    {% for photo in photos %}
+        <div class="photo-card" data-pet="{{ photo.pet }}">
+            <div class="photo-wrapper">
+                <img src="{{ photo.image.url }}" alt="{{ photo.title }}" loading="lazy">
+                <div class="photo-overlay">
+                    <span class="photo-tag">{{ photo.get_pet_display }}</span>
+                </div>
+            </div>
+            {% if photo.title %}
+            <div class="photo-info">
+                <h3>{{ photo.title }}</h3>
+            </div>
+            {% endif %}
+        </div>
+    {% empty %}
+        <div class="empty-state">
+            <h2>No photos yet!</h2>
+            <p>Ready to see some cute pets? Head over to the <a href="/admin">Admin Area</a> to upload the first photo.</p>
+        </div>
+    {% endfor %}
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const buttons = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.photo-card');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class
+                buttons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filter = button.getAttribute('data-filter');
+
+                cards.forEach(card => {
+                    const pet = card.getAttribute('data-pet');
+                    if (filter === 'all' || pet === filter || pet === 'both') {
+                        card.style.display = 'block';
+                        // Add a small animation effect
+                        card.style.animation = 'fadeIn 0.5s ease-in-out';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}
